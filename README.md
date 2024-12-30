@@ -1,4 +1,4 @@
-# Learning-Laravel
+# Learning-Laravel DAy 1
 Exercise: Dynamic Greeting Page
 Objective:
 Define a route that accepts a dynamic parameter.
