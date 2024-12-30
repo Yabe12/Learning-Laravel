@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contact</title>
+    <title>Greeting page</title>
 </head>
 <body>
-    <h1>contact Us</h1>
-    <p>Welcome to the contact Us page! Here, you can learn more about our mission and vision.</p>
+    <h1>Greeting page</h1>
+    <p>Hello {{$name}}! wellcome to our sit</p>
 </body>
 </html>
+ 

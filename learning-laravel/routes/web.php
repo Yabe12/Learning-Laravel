@@ -10,3 +10,9 @@ Route::get('/home', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+Route::get('/greet/{name}', function ($name) {
+    return view('greet',['name' => $name]);
+});
+Route::get('/user/{id}', function ($id) {
+    return view('user',['id' => $id]);
+});
