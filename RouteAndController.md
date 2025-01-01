@@ -67,3 +67,127 @@ The **Model-View-Controller (MVC)** architecture is a design pattern used to sep
 - The View displays the list of matching businesses, possibly with links, images, and details.
 
 ---
+HTTP verbs, also known as HTTP methods, are part of the HTTP protocol and define the type of action the client wants the server to perform. Each HTTP verb has specific characteristics and use cases. Here's a detailed explanation of the most common HTTP verbs, their differences, and their **idempotency** status:
+
+---
+
+### 1. **GET**
+- **Purpose**: Retrieve data from the server.
+- **Characteristics**:
+  - Used to fetch resources, such as web pages or API data.
+  - Should **not** modify server data.
+  - Data can be passed via the URL query string (e.g., `?key=value`).
+- **Example**:
+  - Request: `GET /users/1`
+  - Response: Returns user data for the user with ID `1`.
+- **Idempotent**: Yes. Repeating a `GET` request will not change the server state.
+
+---
+
+### 2. **POST**
+- **Purpose**: Submit data to the server, often to create a new resource.
+- **Characteristics**:
+  - Used for actions like submitting forms or creating new entities.
+  - Data is typically sent in the request body.
+  - Results in changes to the server's state (e.g., creating a new record).
+- **Example**:
+  - Request: `POST /users` (with body `{ "name": "Alice", "email": "alice@example.com" }`)
+  - Response: Returns the created resource or confirmation of creation.
+- **Idempotent**: No. Repeating a `POST` request may create duplicate resources or have unintended effects.
+
+---
+
+### 3. **PUT**
+- **Purpose**: Update an existing resource or create a resource if it does not exist (upsert).
+- **Characteristics**:
+  - Requires the entire resource data to be sent in the request.
+  - Replaces the resource entirely, even if only part of it is updated.
+- **Example**:
+  - Request: `PUT /users/1` (with body `{ "name": "Alice", "email": "alice@example.com" }`)
+  - Response: Updates the user with ID `1` or creates it if it doesn’t exist.
+- **Idempotent**: Yes. Repeating the same `PUT` request produces the same result.
+
+---
+
+### 4. **PATCH**
+- **Purpose**: Partially update an existing resource.
+- **Characteristics**:
+  - Sends only the fields to be updated in the resource.
+  - More efficient than `PUT` for partial updates.
+- **Example**:
+  - Request: `PATCH /users/1` (with body `{ "email": "newemail@example.com" }`)
+  - Response: Updates the email of the user with ID `1`.
+- **Idempotent**: Yes. Repeating the same `PATCH` request produces the same result.
+
+---
+
+### 5. **DELETE**
+- **Purpose**: Remove a resource from the server.
+- **Characteristics**:
+  - Used to delete a specific resource or collection of resources.
+- **Example**:
+  - Request: `DELETE /users/1`
+  - Response: Deletes the user with ID `1`.
+- **Idempotent**: Yes. Repeating a `DELETE` request on the same resource will not change the outcome (the resource remains deleted).
+
+---
+
+### 6. **HEAD**
+- **Purpose**: Retrieve the headers of a resource without the body.
+- **Characteristics**:
+  - Useful for checking if a resource exists or retrieving metadata (e.g., content type, size).
+- **Example**:
+  - Request: `HEAD /users/1`
+  - Response: Returns headers without the user's data.
+- **Idempotent**: Yes.
+
+---
+
+### 7. **OPTIONS**
+- **Purpose**: Discover the allowed methods for a resource.
+- **Characteristics**:
+  - Returns a list of supported HTTP methods for a specific endpoint.
+- **Example**:
+  - Request: `OPTIONS /users`
+  - Response: Headers indicating allowed methods (e.g., `Allow: GET, POST`).
+- **Idempotent**: Yes.
+
+---
+
+### 8. **TRACE**
+- **Purpose**: Echoes the received request for debugging purposes.
+- **Characteristics**:
+  - Used to diagnose issues by examining the intermediate servers' request handling.
+- **Example**:
+  - Request: `TRACE /users`
+  - Response: Echoes the exact request back to the client.
+- **Idempotent**: Yes.
+
+---
+
+### Differences Between HTTP Verbs
+| Verb     | Purpose                  | Modifies Server Data | Idempotent | Safe |
+|----------|--------------------------|-----------------------|------------|------|
+| **GET**  | Retrieve data            | No                   | Yes        | Yes  |
+| **POST** | Create a resource        | Yes                  | No         | No   |
+| **PUT**  | Replace a resource       | Yes                  | Yes        | No   |
+| **PATCH**| Partially update resource| Yes                  | Yes        | No   |
+| **DELETE**| Delete a resource       | Yes                  | Yes        | No   |
+| **HEAD** | Retrieve headers         | No                   | Yes        | Yes  |
+| **OPTIONS**| Check allowed methods | No                   | Yes        | Yes  |
+| **TRACE**| Debugging               | No                   | Yes        | No   |
+
+---
+
+### Idempotent Verbs
+**Idempotent** methods produce the same result no matter how many times they are repeated.  
+These include:
+- `GET`
+- `PUT`
+- `DELETE`
+- `HEAD`
+- `OPTIONS`
+
+**Non-idempotent** methods, like `POST`, may lead to different results when repeated (e.g., creating duplicate records).
+
+**Safe Methods**: `GET`, `HEAD`, and `OPTIONS` are considered safe as they do not modify server data.
