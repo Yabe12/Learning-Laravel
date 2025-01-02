@@ -1,3 +1,5 @@
+# **Model-View-Controller (MVC)**
+
 The **Model-View-Controller (MVC)** architecture is a design pattern used to separate concerns in software applications, particularly in web development. It organizes code into three interconnected components: **Model**, **View**, and **Controller**, each handling specific aspects of the application. Here's how it works in detail:
 
 ---
@@ -44,7 +46,7 @@ The **Model-View-Controller (MVC)** architecture is a design pattern used to sep
 
 ---
 
-### Flow of MVC
+## Flow of MVC
 1. **User Interaction**: The user interacts with the interface (e.g., clicking a button or submitting a form).
 2. **Controller Handles Input**: The Controller receives the input, processes it, and calls methods on the Model.
 3. **Model Updates Data**: The Model retrieves or updates data, applying business rules.
@@ -66,6 +68,8 @@ The **Model-View-Controller (MVC)** architecture is a design pattern used to sep
 #### View:
 - The View displays the list of matching businesses, possibly with links, images, and details.
 
+
+# HTTP verbs
 ---
 HTTP verbs, also known as HTTP methods, are part of the HTTP protocol and define the type of action the client wants the server to perform. Each HTTP verb has specific characteristics and use cases. Here's a detailed explanation of the most common HTTP verbs, their differences, and their **idempotency** status:
 
@@ -375,7 +379,7 @@ In Laravel, **route grouping** allows you to group related routes under a common
 
 ---
 
-### 1. **Basic Route Grouping**
+# 1. **Basic Route Grouping**
 You can group multiple routes that share a common prefix using the `Route::group` method.
 
 #### Example:
@@ -557,7 +561,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 4. **Reusability**: Groups allow applying common attributes to multiple routes.
 
 By using route groups effectively, you can create a robust, maintainable, and scalable routing structure in your Laravel application.
-### Rate Limiting in Laravel
+# Rate Limiting in Laravel
 
 Rate limiting is a technique to control the number of requests a client can make to your application over a given period. Laravel provides built-in support for rate limiting, allowing you to safeguard your application from abuse, such as DDoS attacks or API misuse.
 
@@ -729,7 +733,7 @@ RateLimiter::for('api', function (Request $request) {
 4. **Efficiency**: Reduces server load by limiting unnecessary requests.
 
 By implementing rate limiting effectively, you can maintain application performance and enhance user experience while securing your system.
-### Subdomain Naming and Namespaces in Laravel
+# Subdomain Naming and Namespaces in Laravel
 
 In Laravel, subdomains and namespaces are useful for organizing routes and controllers in a modular and scalable way. They are particularly helpful when managing complex applications with features that require separation or distinct areas of the application (e.g., admin vs. user sections).
 
@@ -878,7 +882,7 @@ Route::domain('{account}.example.com')->namespace('Account')->group(function () 
 ---
 
 By combining subdomains and namespaces effectively, you can create well-organized, scalable, and maintainable Laravel applications.
-### **Fallback Route, Signed Routes, and Route Signing in Laravel**
+# **Fallback Route, Signed Routes, and Route Signing in Laravel**
 
 Laravel provides features like fallback routes, signed routes, and route signing to enhance route handling and application security. Let’s break each concept down and include real-world scenarios.
 
@@ -1075,7 +1079,7 @@ Route::fallback(function () {
    - Use the `signed` middleware to validate URLs.
 
 By leveraging fallback routes and signed routes, you can create secure and user-friendly Laravel applications that handle edge cases and enhance security.
-### **Controllers in Laravel: Resource Controller, API Resource Controller, and Single Action Controller**
+# **Controllers in Laravel: Resource Controller, API Resource Controller, and Single Action Controller**
 
 Laravel provides several types of controllers to help organize your code and handle HTTP requests efficiently. Each controller type serves specific purposes and use cases. Let's discuss each, their differences, and provide examples.
 
@@ -1241,7 +1245,7 @@ Route::get('/', WelcomeController::class);
 
 ---
 
-### **Differences**
+## **Differences**
 
 | **Feature**              | **Resource Controller**                     | **API Resource Controller**           | **Single Action Controller**      |
 |---------------------------|---------------------------------------------|---------------------------------------|------------------------------------|
@@ -1260,7 +1264,7 @@ Route::get('/', WelcomeController::class);
 - **Single Action Controllers** are best suited for one-off tasks or simple actions.
 
 Choose the appropriate controller type based on the application's requirements to maintain clarity, reusability, and separation of concerns.
-### Integrating HTTP Methods with Controller Actions in Laravel
+# Integrating HTTP Methods with Controller Actions in Laravel
 
 In a typical Laravel web application, each HTTP method (GET, POST, PUT/PATCH, DELETE) is used to handle specific actions for managing resources, such as posts or users. These actions are mapped to corresponding methods in a controller (e.g., `index`, `create`, `store`, `show`, `edit`, `update`, and `destroy`). Below, we will walk through how to integrate these methods with the relevant HTTP verbs (GET, POST, PUT/PATCH, DELETE) using a `PostController` and define routes for each of them.
 
@@ -1418,7 +1422,7 @@ This single line automatically creates the following routes for a full CRUD reso
   
 - **Conclusion**: 
   - Resource controllers and routes help structure Laravel applications in a clean and organized manner. By following the correct HTTP verb conventions, you ensure that your app adheres to RESTful principles, which enhances maintainability, clarity, and scalability.
-  ### **Route Model Binding in Laravel**
+  # **Route Model Binding in Laravel**
 
 Route Model Binding in Laravel is a feature that automatically injects model instances directly into your routes or controller methods. Instead of manually querying the database to retrieve a model instance by its primary key (ID), Laravel automatically performs this for you based on the URL parameter. This can save a lot of time and make your code cleaner and more readable.
 
@@ -1670,7 +1674,7 @@ When the form is submitted, the CSRF token is sent as part of the form data. Lar
 - **CSRF Protection**: Laravel automatically includes CSRF protection in forms using the `@csrf` directive. It prevents malicious actors from submitting forms on behalf of authenticated users, ensuring that only legitimate users can perform actions.
 
 Together, these features (route caching, form method spoofing, and CSRF protection) provide performance optimization and security in Laravel applications, making them more robust and secure against common attacks.
-### **Redirects in Laravel**
+# **Redirects in Laravel**
 
 Laravel provides several helper methods to perform different types of redirects in your application. Redirects are essential in web development for guiding users from one URL to another after a request, such as after form submission, authentication, or performing a certain action.
 
@@ -1829,7 +1833,7 @@ In Laravel, redirects are a common method to guide users to different parts of t
 - **`guest()`**: Check if the user is a guest (unauthenticated).
 
 These methods provide flexibility in handling user navigation and ensure that the user experience is smooth, especially when handling things like form submissions, authentication, and redirecting to various parts of the application.
-### **Abort, abort_if, and abort_unless in Laravel**
+# **Abort, abort_if, and abort_unless in Laravel**
 
 In Laravel, the `abort()`, `abort_if()`, and `abort_unless()` methods are used to immediately stop the request and send an HTTP response, typically an error, when certain conditions are met. These methods help control the flow of your application and are commonly used for handling unauthorized access, invalid data, or other edge cases where you want to terminate the request.
 
@@ -1925,7 +1929,7 @@ In this example:
 These methods are useful for ensuring that certain conditions are met before allowing a request to continue, such as checking user authorization, validating input data, or handling exceptional cases.
 In Laravel, you can customize responses based on the type of data or the action you want to take. Laravel provides several ways to return custom responses, such as JSON responses, views, redirects, and file downloads. Each response type is helpful in different scenarios, and Laravel makes it easy to customize them according to your needs.
 
-### **1. Custom JSON Response**
+# **1. Custom JSON Response**
 
 Laravel provides a simple way to return JSON responses, which are commonly used in APIs. You can customize the data structure and HTTP status code of the JSON response.
 
