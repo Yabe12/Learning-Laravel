@@ -122,7 +122,19 @@ HTTP verbs, also known as HTTP methods, are part of the HTTP protocol and define
   - Request: `PATCH /users/1` (with body `{ "email": "newemail@example.com" }`)
   - Response: Updates the email of the user with ID `1`.
 - **Idempotent**: Yes. Repeating the same `PATCH` request produces the same result.
+### **Final Conclusion**
 
+The **`PATCH` method is typically idempotent**, but its idempotence depends on how the server processes the request:
+
+1. **Idempotent**:  
+   - When the `PATCH` request modifies the resource in a deterministic way (e.g., updating or replacing fields).  
+   - Repeated requests result in the same resource state as applying it once.
+
+2. **Non-idempotent**:  
+   - When the `PATCH` request performs cumulative or state-dependent operations (e.g., incrementing counters or appending to lists).  
+   - Repeated requests result in different resource states.
+
+**Key Takeaway**: While `PATCH` is generally idempotent, its behavior can vary based on the operation and implementation, so it’s essential to design and document APIs clearly to ensure predictable behavior.
 ---
 
 ### 5. **DELETE**
